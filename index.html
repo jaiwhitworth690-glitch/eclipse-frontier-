@@ -1,54 +1,60 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101721" />
-    <meta name="description" content="Eclipse Frontier — a small, original 3D action RPG field prototype." />
-    <title>Eclipse Frontier — The Shattered Verge</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-    <script type="importmap">
-      {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}
-    </script>
-  </head>
-  <body>
-    <main id="game" aria-label="Eclipse Frontier game">
-      <canvas id="world"></canvas>
-      <div class="film-grain"></div>
-
-      <section id="title-screen" class="title-screen">
-        <div class="title-copy">
-          <div class="eyebrow"><span></span> A FIELD TEST • CHAPTER 01</div>
-          <h1>ECLIPSE<br /><em>FRONTIER</em></h1>
-          <p class="subtitle">THE SHATTERED VERGE</p>
-          <p class="intro">The old light is fading. Follow the fragments before the night learns your name.</p>
-          <button id="begin" class="begin-button"><span>ENTER THE FRONTIER</span><b>↗</b></button>
-          <div class="title-foot">AN ORIGINAL ACTION RPG PROTOTYPE <span>✳</span> BUILT FOR THE WILD</div>
-        </div>
-        <div class="title-meta">NORTH REACH <i>·</i> 04:17 BEFORE DAWN</div>
-      </section>
-
-      <section id="hud" class="hud hidden" aria-label="Game interface">
-        <header class="topbar">
-          <div class="identity"><span class="sigil">✳</span><div><b>WAYFARER</b><small>LEVEL <strong>03</strong> &nbsp;·&nbsp; ASHEN WARD</small></div></div>
-          <div class="region"><span>FIELD JOURNAL &nbsp; / &nbsp; 01</span><b>THE SHATTERED VERGE</b><small>✧ &nbsp; CLEARING THE PATH</small></div>
-          <div class="sound-toggle">FIELD TEST <span>01</span></div>
-        </header>
-        <div class="quest"><span class="quest-kicker">✧ &nbsp; MAIN QUEST</span><b>Shards in the Grass</b><small>Gather <strong id="quest-count">0 / 3</strong> sunshards from the clearing.</small><div class="quest-progress"><i id="quest-progress"></i></div></div>
-        <div class="player-status"><div class="status-heading"><span class="portrait">✦</span><div><b>KAEL</b><small>WANDERER OF THE VEIL</small></div><span class="level">03</span></div><div class="meter-label"><span>VITALITY</span><b id="health-number">100</b></div><div class="meter"><i id="health-fill"></i></div><div class="meter-label stamina-label"><span>STAMINA</span><b id="stamina-number">100</b></div><div class="meter"><i id="stamina-fill"></i></div></div>
-        <div id="enemy-status" class="enemy-status hidden"><span>✦ &nbsp; VEIL STALKER</span><div class="meter enemy-meter"><i id="enemy-fill"></i></div></div>
-        <div class="interaction" id="interaction"><i></i><span id="interaction-text">The clearing stirs around you.</span></div>
-        <div class="loot-toast" id="loot-toast"><span>✧</span><div><small>RELIC ACQUIRED</small><b>Sunshard <i>✧ UNCOMMON</i></b><em>+ 1 Wayfinder Fragment</em></div></div>
-        <div class="controls"><div class="key-cluster"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><span>MOVE</span><i></i><kbd class="wide">SHIFT</kbd><span>DODGE</span><i></i><kbd class="mouse">LMB</kbd><span>ATTACK</span><div class="controls-note">CLICK & DRAG TO LOOK</div></div>
-        <div id="crosshair" class="crosshair"><i></i><i></i><i></i><i></i></div>
-        <div id="toast" class="toast">A memory stirs in the dust.</div>
-      </section>
-      <div id="loading" class="loading">AWAKENING THE FRONTIER <span>✳</span></div>
-    </main>
-    <script type="module" src="game.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101721" />
+  <meta name="description" content="Choose your path into Eclipse Frontier." />
+  <title>Eclipse Frontier — Choose Your Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet" />
+  <style>
+    :root{font-family:"DM Sans",sans-serif;color:#f6f0e7;background:#101721;font-synthesis:none;text-rendering:optimizeLegibility}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 72% 20%,#33464b 0,#1a2830 34%,#101721 72%);display:grid;place-items:center;padding:36px 22px}
+    main{width:min(1040px,100%);position:relative}
+    .eyebrow{font-size:9px;letter-spacing:.25em;color:#d1c4ae;display:flex;align-items:center;gap:12px}
+    .eyebrow:before{content:"";width:5px;height:5px;border:1px solid #d4b78c;transform:rotate(45deg)}
+    h1{font:400 clamp(58px,10vw,112px)/.9 Marcellus,serif;letter-spacing:-.065em;margin:28px 0 13px;color:#f1eadf}
+    h1 em{font-style:normal;color:#e1bd88}
+    .intro{max-width:570px;margin:0;color:#c9c6be;font-size:15px;line-height:1.8}
+    .paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:46px}
+    .path{min-height:260px;display:flex;flex-direction:column;padding:26px;background:linear-gradient(145deg,rgba(27,39,46,.92),rgba(16,23,31,.88));border:1px solid rgba(211,178,129,.38);text-decoration:none;color:inherit;transition:transform .2s,border-color .2s,background .2s}
+    .path:hover{transform:translateY(-4px);border-color:#d3b281;background:linear-gradient(145deg,rgba(44,58,62,.96),rgba(20,28,36,.94))}
+    .number{font-size:9px;letter-spacing:.2em;color:#d3b281}
+    h2{font:400 27px Marcellus,serif;margin:19px 0 8px;color:#f1eadf}
+    .tag{font-size:9px;letter-spacing:.16em;color:#cbb894;text-transform:uppercase}
+    .desc{max-width:420px;color:#bcbdb8;font-size:13px;line-height:1.75;margin:16px 0 27px}
+    .enter{margin-top:auto;color:#e5c899;font-size:9px;font-weight:700;letter-spacing:.17em}
+    .enter span{font-size:16px;margin-left:8px}
+    footer{margin-top:28px;color:#9b9d9b;font-size:9px;letter-spacing:.13em}
+    @media(max-width:680px){body{padding:28px 18px}.paths{grid-template-columns:1fr;margin-top:30px}.path{min-height:220px;padding:22px}h1{margin-top:22px}.intro{font-size:14px}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">ONE FRONTIER · TWO ADVENTURES</div>
+    <h1>ECLIPSE<br /><em>FRONTIER</em></h1>
+    <p class="intro">The old light is fading. Choose where your journey begins: the original Shattered Verge field test or the expanded wilderness beyond it.</p>
+    <nav class="paths" aria-label="Choose an adventure">
+      <a class="path" href="shattered-verge.html">
+        <span class="number">01 / FIELD TEST</span>
+        <h2>The Shattered Verge</h2>
+        <span class="tag">The original clearing</span>
+        <p class="desc">Follow the forest path, face the Veil Stalker, and gather three sunshards from the clearing.</p>
+        <span class="enter">ENTER THE SHATTERED VERGE <span>↗</span></span>
+      </a>
+      <a class="path" href="expanded-frontier.html">
+        <span class="number">02 / EXPLORATION BUILD</span>
+        <h2>The Verdant Reach</h2>
+        <span class="tag">The expanded wilderness</span>
+        <p class="desc">Explore a much larger frontier, battle creatures, collect loot, grow stronger, and uncover the Sunken Archive.</p>
+        <span class="enter">ENTER THE VERDANT REACH <span>↗</span></span>
+      </a>
+    </nav>
+    <footer>WASD MOVE · MOUSE LOOK · LMB ATTACK · SINGLE-PLAYER PROTOTYPE</footer>
+  </main>
+</body>
 </html>
 

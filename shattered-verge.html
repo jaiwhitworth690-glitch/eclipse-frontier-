@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101721" />
+    <meta name="description" content="Eclipse Frontier — a small, original 3D action RPG field prototype." />
+    <title>Eclipse Frontier — The Shattered Verge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="importmap">
+      {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}
+    </script>
+  </head>
+  <body>
+    <main id="game" aria-label="Eclipse Frontier game">
+      <a class="build-switch" href="index.html">← ADVENTURE SELECT</a>
+      <canvas id="world"></canvas>
+      <div class="film-grain"></div>
+
+      <section id="title-screen" class="title-screen">
+        <div class="title-copy">
+          <div class="eyebrow"><span></span> A FIELD TEST • CHAPTER 01</div>
+          <h1>ECLIPSE<br /><em>FRONTIER</em></h1>
+          <p class="subtitle">THE SHATTERED VERGE</p>
+          <p class="intro">The old light is fading. Follow the fragments before the night learns your name.</p>
+          <button id="begin" class="begin-button"><span>ENTER THE FRONTIER</span><b>↗</b></button>
+          <div class="title-foot">AN ORIGINAL ACTION RPG PROTOTYPE <span>✳</span> BUILT FOR THE WILD</div>
+        </div>
+        <div class="title-meta">NORTH REACH <i>·</i> 04:17 BEFORE DAWN</div>
+      </section>
+
+      <section id="hud" class="hud hidden" aria-label="Game interface">
+        <header class="topbar">
+          <div class="identity"><span class="sigil">✳</span><div><b>WAYFARER</b><small>LEVEL <strong>03</strong> &nbsp;·&nbsp; ASHEN WARD</small></div></div>
+          <div class="region"><span>FIELD JOURNAL &nbsp; / &nbsp; 01</span><b>THE SHATTERED VERGE</b><small>✧ &nbsp; CLEARING THE PATH</small></div>
+          <div class="sound-toggle">FIELD TEST <span>01</span></div>
+        </header>
+        <div class="quest"><span class="quest-kicker">✧ &nbsp; MAIN QUEST</span><b>Shards in the Grass</b><small>Gather <strong id="quest-count">0 / 3</strong> sunshards from the clearing.</small><div class="quest-progress"><i id="quest-progress"></i></div></div>
+        <div class="player-status"><div class="status-heading"><span class="portrait">✦</span><div><b>KAEL</b><small>WANDERER OF THE VEIL</small></div><span class="level">03</span></div><div class="meter-label"><span>VITALITY</span><b id="health-number">100</b></div><div class="meter"><i id="health-fill"></i></div><div class="meter-label stamina-label"><span>STAMINA</span><b id="stamina-number">100</b></div><div class="meter"><i id="stamina-fill"></i></div></div>
+        <div id="enemy-status" class="enemy-status hidden"><span>✦ &nbsp; VEIL STALKER</span><div class="meter enemy-meter"><i id="enemy-fill"></i></div></div>
+        <div class="interaction" id="interaction"><i></i><span id="interaction-text">The clearing stirs around you.</span></div>
+        <div class="loot-toast" id="loot-toast"><span>✧</span><div><small>RELIC ACQUIRED</small><b>Sunshard <i>✧ UNCOMMON</i></b><em>+ 1 Wayfinder Fragment</em></div></div>
+        <div class="controls"><div class="key-cluster"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><span>MOVE</span><i></i><kbd class="wide">SHIFT</kbd><span>DODGE</span><i></i><kbd class="mouse">LMB</kbd><span>ATTACK</span><div class="controls-note">CLICK & DRAG TO LOOK</div></div>
+        <div id="crosshair" class="crosshair"><i></i><i></i><i></i><i></i></div>
+        <div id="toast" class="toast">A memory stirs in the dust.</div>
+      </section>
+      <div id="loading" class="loading">AWAKENING THE FRONTIER <span>✳</span></div>
+    </main>
+    <script type="module" src="game.js"></script>
+  </body>
+</html>
+
+
